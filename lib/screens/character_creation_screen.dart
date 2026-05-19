@@ -74,7 +74,7 @@ class _State extends State<CharacterCreationScreen> {
               alignment: Alignment.centerLeft,
               child: IconButton(
                 icon: const Icon(Icons.arrow_back, size: 20, color: C.ink),
-                onPressed: () => Navigator.maybePop(context),
+                onPressed: () => Navigator.pop(context),
               ),
             ),
 
@@ -216,23 +216,6 @@ class _State extends State<CharacterCreationScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // Pagination dots — 5 dots, first one wide
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                      5,
-                      (i) => Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 3),
-                            width: i == 0 ? 22 : 7,
-                            height: 7,
-                            decoration: BoxDecoration(
-                              color: i == 0
-                                  ? C.dark
-                                  : C.inkFaint.withOpacity(0.35),
-                              borderRadius: BorderRadius.circular(999),
-                            ),
-                          )),
-                ),
               ]),
             ),
           ],

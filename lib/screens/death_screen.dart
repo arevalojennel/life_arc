@@ -8,9 +8,20 @@ import '../widgets/stat_bar.dart';
 import 'splash_screen.dart';
 
 String _money(int v) {
-  if (v >= 1000000) return '\$${(v / 1000000).toStringAsFixed(1)}M';
-  if (v >= 1000) return '\$${(v / 1000).toStringAsFixed(1)}k';
-  return '\$$v';
+  final isNegative = v < 0;
+  final value = v.abs();
+
+  String result;
+
+  if (value >= 1000000) {
+    result = '${(value / 1000000).toStringAsFixed(1)}M';
+  } else if (value >= 1000) {
+    result = '${(value / 1000).toStringAsFixed(1)}k';
+  } else {
+    result = value.toString();
+  }
+
+  return isNegative ? '-\$$result' : '\$$result';
 }
 
 class DeathScreen extends StatelessWidget {
@@ -57,6 +68,13 @@ class DeathScreen extends StatelessWidget {
                 const SizedBox(height: 6),
 
                 Text('You lived to age ${ch.age}',
+                        style:
+                            GoogleFonts.inter(fontSize: 13, color: C.deathSub))
+                    .animate()
+                    .fadeIn(delay: 280.ms),
+                const SizedBox(height: 6),
+
+                Text('Total Networth ${_money(ch.money)}',
                         style:
                             GoogleFonts.inter(fontSize: 13, color: C.deathSub))
                     .animate()
@@ -230,7 +248,11 @@ class DeathScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 50,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (_) => const SplashScreen(),
+                      ),
+                    ),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: C.deathText,
                       side: BorderSide(
@@ -238,33 +260,40 @@ class DeathScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: Text('View Full Summary',
-                        style: GoogleFonts.inter(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: C.deathText)),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('New Life',
+                            style: GoogleFonts.inter(
+                                fontSize: 14,
+                                color: C.deathText,
+                                fontWeight: FontWeight.w500)),
+                        const SizedBox(width: 4),
+                        const Icon(Icons.refresh, size: 15, color: C.deathSub),
+                      ],
+                    ),
                   ),
                 ).animate().fadeIn(delay: 800.ms),
 
-                const SizedBox(height: 14),
+                // const SizedBox(height: 14),
 
-                // "New Life ↺" text link
-                GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (_) => const SplashScreen())),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text('New Life',
-                          style: GoogleFonts.inter(
-                              fontSize: 14,
-                              color: C.deathSub,
-                              fontWeight: FontWeight.w500)),
-                      const SizedBox(width: 4),
-                      const Icon(Icons.refresh, size: 15, color: C.deathSub),
-                    ],
-                  ),
-                ).animate().fadeIn(delay: 860.ms),
+                // // "New Life ↺" text link
+                // GestureDetector(
+                //   onTap: () => Navigator.of(context).pushReplacement(
+                //       MaterialPageRoute(builder: (_) => const SplashScreen())),
+                //   child: Row(
+                //     mainAxisSize: MainAxisSize.min,
+                //     children: [
+                //       Text('New Life',
+                //           style: GoogleFonts.inter(
+                //               fontSize: 14,
+                //               color: C.deathSub,
+                //               fontWeight: FontWeight.w500)),
+                //       const SizedBox(width: 4),
+                //       const Icon(Icons.refresh, size: 15, color: C.deathSub),
+                //     ],
+                //   ),
+                // ).animate().fadeIn(delay: 860.ms),
 
                 const SizedBox(height: 20),
               ],

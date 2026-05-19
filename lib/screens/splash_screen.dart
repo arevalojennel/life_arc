@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import '../main.dart';
-import '../services/game_state.dart';
 import 'character_creation_screen.dart';
-import 'game_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -102,8 +99,7 @@ class SplashScreen extends StatelessWidget {
                             width: double.infinity,
                             height: 52,
                             child: ElevatedButton(
-                              onPressed: () =>
-                                  Navigator.of(context).pushReplacement(
+                              onPressed: () => Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (_) =>
                                         const CharacterCreationScreen()),
@@ -123,35 +119,6 @@ class SplashScreen extends StatelessWidget {
                           ),
 
                           const SizedBox(height: 12),
-
-                          // Continue — ghost pill
-                          SizedBox(
-                            width: double.infinity,
-                            height: 52,
-                            child: OutlinedButton(
-                              onPressed: () {
-                                final state = context.read<GameState>();
-                                if (state.character != null) {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (_) => const GameScreen()),
-                                  );
-                                }
-                              },
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: C.ink,
-                                side: BorderSide(
-                                    color: C.ink.withOpacity(0.3), width: 1.5),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(999)),
-                              ),
-                              child: Text('Continue',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: C.ink)),
-                            ),
-                          ),
                         ],
                       ),
                     ),

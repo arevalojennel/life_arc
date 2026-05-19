@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_modern_animated_loader/flutter_animated_loader.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lifearc/models/character.dart';
 import 'package:provider/provider.dart';
@@ -267,22 +268,16 @@ class _MainScreen extends StatelessWidget {
 
 class _LoadingCard extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Container(
-        width: double.infinity,
-        margin: const EdgeInsets.only(top: 8),
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: C.surface,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: C.div),
-        ),
-        child: Column(children: [
-          const CircularProgressIndicator(color: C.dark, strokeWidth: 2),
-          const SizedBox(height: 14),
-          Text('Life is unfolding…',
-              style: GoogleFonts.inter(
-                  fontSize: 13, color: C.inkSub, fontStyle: FontStyle.italic)),
-        ]),
+  Widget build(BuildContext context) => Column(
+        children: [
+          FlutterAnimatedLoader.heartBeat(color: C.inkFaint, size: 50),
+          const SizedBox(height: 16),
+          Text(
+            'Life is unfolding…',
+            style: GoogleFonts.inter(
+                fontSize: 13, color: C.inkSub, fontStyle: FontStyle.italic),
+          ),
+        ],
       );
 }
 

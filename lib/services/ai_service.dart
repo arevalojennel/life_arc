@@ -7,6 +7,11 @@ class AIService {
   static const String _model = 'gemini-2.5-flash';
   static String get _baseUrl =>
       'https://generativelanguage.googleapis.com/v1beta/models/$_model:generateContent?key=$_apiKey';
+  static final Map<String, Set<String>> _usedFallbackEvents = {};
+
+  static void resetFallbackEvents() {
+    _usedFallbackEvents.clear();
+  }
 
   static Future<LifeEvent> generateLifeEvent(Character character) async {
     final recentEvents = character.lifeEvents.length > 3
@@ -239,10 +244,34 @@ Return ONLY valid JSON.
     );
   }
 
+  static LifeEvent _getUniqueFallbackEvent(String stage) {
+    final events = _fallbackEvents(stage);
+
+    // initialize set for this stage
+    _usedFallbackEvents.putIfAbsent(stage, () => <String>{});
+
+    final used = _usedFallbackEvents[stage]!;
+
+    // filter unused events
+    final available = events.where((e) => !used.contains(e.title)).toList();
+
+    // if everything used, reset (or you can keep it strict)
+    if (available.isEmpty) {
+      used.clear();
+      available.addAll(events);
+    }
+
+    available.shuffle();
+    final selected = available.first;
+
+    // mark as used
+    used.add(selected.title);
+
+    return selected;
+  }
+
   static LifeEvent _fallbackEvent(Character character) {
-    final events = _fallbackEvents(character.lifeStage);
-    events.shuffle();
-    return events.first;
+    return _getUniqueFallbackEvent(character.lifeStage);
   }
 
   static List<LifeEvent> _fallbackEvents(String stage) {

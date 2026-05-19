@@ -19,6 +19,7 @@ class GameState extends ChangeNotifier {
     phase = GamePhase.idle;
     isLoading = false;
     error = null;
+    AIService.resetFallbackEvents();
     character!.healthHistory.add(character!.health);
     character!.happinessHistory.add(character!.happiness);
     character!.wealthHistory.add(character!.wealth);
