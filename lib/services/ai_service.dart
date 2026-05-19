@@ -142,8 +142,6 @@ Return ONLY valid JSON.
         }),
       );
 
-      print(response.body);
-
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final text =

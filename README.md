@@ -2,9 +2,11 @@
 
 LifeArc is a Flutter-based life simulation game inspired by BitLife, where players make life choices, experience random events, and shape their character’s future over time.
 
+The game uses Google's Gemini AI model (`gemini-2.5-flash`) to dynamically generate intelligent life events, outcomes, and scenarios.
+
 ## ✨ Features
 
-- AI-generated life events
+- AI-generated life events using Gemini 2.5 Flash
 - Choice-based outcomes
 - Character stats progression
 - Net worth tracking
@@ -12,6 +14,27 @@ LifeArc is a Flutter-based life simulation game inspired by BitLife, where playe
 - Animated stat graphs
 - Passive random events
 - Modern mobile UI inspired by BitLife
+
+---
+
+# 🤖 AI-Powered Gameplay
+
+LifeArc integrates:
+
+- `gemini-2.5-flash`
+
+for generating:
+- dynamic life events
+- realistic choices
+- random scenarios
+- passive world events
+- personalized outcomes
+
+This allows gameplay to feel:
+- unique
+- unpredictable
+- replayable
+- human-like
 
 ---
 
@@ -60,27 +83,6 @@ Example:
 
 ```dart
 NetWorthContainer(value: ch.money)
-```
-
----
-
-# 🧠 AI Event Generation
-
-Each event contains:
-- title
-- description
-- choices
-- outcomes
-- stat changes
-
-Example:
-
-```json
-{
-  "title": "You got accepted into university",
-  "description": "A prestigious school accepted your application.",
-  "choices": []
-}
 ```
 
 ---
@@ -213,6 +215,7 @@ Inspired by:
 - Flutter
 - Dart
 - Provider
+- Gemini 2.5 Flash API
 
 ---
 
