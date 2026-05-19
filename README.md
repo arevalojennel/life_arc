@@ -44,9 +44,6 @@ Players start by creating a character with:
 - Name
 - Personality trait
 
-<!-- ![Character Creation](assets/gif/Character_Creation.gif) -->
-<img src="assets/gif/Character_Creation.gif" width="300" />
-
 Each character has:
 - Age
 - Health
@@ -54,6 +51,8 @@ Each character has:
 - Wealth
 - Relationships
 - Money / Net Worth
+
+<img src="assets/gif/Character_Creation.gif" width="100" />
 
 ---
 
@@ -70,6 +69,8 @@ Features:
 - Historical tracking
 - Animated line graphs
 - Values clamped from 0–100
+
+<img src="assets/img/Dynamic_stats.png" width="100" />
 
 ---
 
@@ -99,10 +100,15 @@ Examples:
 - lottery win
 - accidents
 
+<img src="assets/gif/Passive_Life_Event.gif" width="100" />
+
+
 Passive events automatically:
 - apply stat changes
 - update history
 - continue gameplay
+
+<img src="assets/gif/Death_Event.gif" width="100" />
 
 ---
 
@@ -114,6 +120,8 @@ Example:
 Age 18: Graduated High School — Studied hard
 Age 22: Got First Job — Accepted the offer
 ```
+
+<img src="assets/gif/Life_History.gif" width="100" />
 
 ---
 
@@ -133,6 +141,8 @@ Graph Features:
 - smooth curves
 - border-safe rendering
 - responsive width
+
+<img src="assets/img/Stats_Graph.png" width="100" />
 
 ---
 
