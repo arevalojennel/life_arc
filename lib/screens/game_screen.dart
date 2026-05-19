@@ -90,14 +90,13 @@ class _MainScreen extends StatelessWidget {
                   Positioned.fill(
                       child: CustomPaint(painter: _LandscapePainter())),
 
-                  // Top bar: hamburger + bookmark
                   SafeArea(
                     bottom: false,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 18, vertical: 10),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           GestureDetector(
                             onTap: () => Navigator.push(
@@ -107,8 +106,6 @@ class _MainScreen extends StatelessWidget {
                             child: const Icon(Icons.menu,
                                 color: Colors.white, size: 22),
                           ),
-                          const Icon(Icons.bookmark_border,
-                              color: Colors.white, size: 22),
                         ],
                       ),
                     ),
@@ -150,65 +147,6 @@ class _MainScreen extends StatelessWidget {
                 ]),
               ),
 
-              // ── Stats + content ────────────────────────────────────────────
-              // Expanded(
-              //   child: SingleChildScrollView(
-              //     padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-              //     child: Column(
-              //       children: [
-              //         // Loading or event card or Age Up button
-              //         if (state.isLoading)
-              //           _LoadingCard()
-              //         else if (state.currentEvent != null &&
-              //             (state.phase == GamePhase.event ||
-              //                 state.phase == GamePhase.choosing))
-              //           _EventCard(state: state)
-              //         else if (state.phase == GamePhase.idle &&
-              //             !state.isLoading)
-              //           _AgeUpButton(
-              //             onPressed: () => state.ageUp(),
-              //           ),
-
-              //         const SizedBox(height: 16),
-              //         // 4 stat cards
-              //         StatCard(
-              //           label: 'Health',
-              //           value: ch.health,
-              //           color: C.health,
-              //           bgColor: C.healthBg,
-              //           iconWidget: const Icon(Icons.favorite,
-              //               color: C.health, size: 17),
-              //         ),
-              //         StatCard(
-              //           label: 'Happiness',
-              //           value: ch.happiness,
-              //           color: C.happy,
-              //           bgColor: C.happyBg,
-              //           iconWidget: const Icon(Icons.sentiment_satisfied_alt,
-              //               color: C.happy, size: 17),
-              //         ),
-              //         StatCard(
-              //           label: 'Wealth',
-              //           value: ch.wealth,
-              //           color: C.wealth,
-              //           bgColor: C.wealthBg,
-              //           iconWidget: _dollarIcon(C.wealth),
-              //         ),
-              //         StatCard(
-              //           label: 'Relationships',
-              //           value: ch.relationships,
-              //           color: C.social,
-              //           bgColor: C.socialBg,
-              //           iconWidget:
-              //               const Icon(Icons.people, color: C.social, size: 17),
-              //         ),
-              //         NetWorthContainer(value: ch.money),
-
-              //         const SizedBox(height: 4),
-              //       ],
-              //     ),
-              //   ),
-              // ),
               Expanded(
                   child: Container(
                 color: Colors.white,
