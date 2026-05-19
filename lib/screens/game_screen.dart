@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_modern_animated_loader/flutter_animated_loader.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lifearc/models/character.dart';
@@ -12,12 +10,6 @@ import '../widgets/networth_container.dart';
 import '../widgets/stat_bar.dart';
 import 'death_screen.dart';
 import 'history_screen.dart';
-
-String _money(int v) {
-  if (v >= 1000000) return '\$${(v / 1000000).toStringAsFixed(1)}M';
-  if (v >= 1000) return '\$${(v / 1000).toStringAsFixed(1)}k';
-  return '\$$v';
-}
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});
@@ -41,12 +33,7 @@ class GameScreen extends StatelessWidget {
       if (state.phase == GamePhase.outcome) {
         return _OutcomeScreen(state: state);
       }
-      // if (state.phase == GamePhase.outcome && state.lastChoice != null) {
-      //   return _OutcomeScreen(state: state);
-      // }
-      // if (state.currentEvent?.isPassiveEvent == true) {
-      //   return _OutcomeScreen(state: state);
-      // }
+
       return _MainScreen(state: state);
     });
   }
@@ -406,7 +393,7 @@ class _EventCard extends StatelessWidget {
 }
 
 class _ChoiceCard extends StatefulWidget {
-  final choice;
+  final dynamic choice;
   final Color dotColor;
   final VoidCallback onTap;
   const _ChoiceCard(
@@ -716,18 +703,6 @@ class _Change {
   const _Change(this.label, this.val, this.color, this.icon,
       {this.isMoney = false});
 }
-
-Widget _dollarIcon(Color color) => Container(
-      width: 14,
-      height: 14,
-      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-      child: const Center(
-          child: Text('\$',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 8,
-                  fontWeight: FontWeight.w800))),
-    );
 
 // ── Landscape scene painter ───────────────────────────────────────────────────
 class _LandscapePainter extends CustomPainter {
