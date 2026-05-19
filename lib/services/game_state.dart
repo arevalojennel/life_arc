@@ -30,6 +30,13 @@ class GameState extends ChangeNotifier {
   // Called when user taps "Age Up" on the main screen
   void ageUp() {
     if (character == null) return;
+
+    if (character!.isDead) {
+      phase = GamePhase.dead;
+      notifyListeners();
+      return;
+    }
+
     _loadNextEvent();
   }
 
@@ -57,7 +64,7 @@ class GameState extends ChangeNotifier {
 
         _applyChoice(syntheticChoice);
 
-        phase = GamePhase.outcome;
+        // phase = GamePhase.outcome;
 
         notifyListeners(); // 🔥 REQUIRED HERE
         return;
@@ -73,35 +80,34 @@ class GameState extends ChangeNotifier {
   }
 
   void _applyChoice(Choice choice) {
-    lastChoice = choice;
-
     final c = character!;
     final e = currentEvent;
 
-    c.health += choice.deltas.health;
-    c.happiness += choice.deltas.happiness;
-    c.wealth += choice.deltas.wealth;
-    c.relationships += choice.deltas.relationships;
-    c.money += choice.deltas.moneyDelta;
-
+    c.applyDeltas(choice.deltas);
     _addHistory(c);
 
-    // if (c.money < 0) c.money = 0;
-    c.clampStats();
-
-    c.age += _ageIncrement();
-
-    // FIX: prevent null crash / missing history
     if (e != null) {
-      c.lifeEvents.add(
-        'Age ${c.age}: ${e.title} — ${choice.text}',
-      );
+      c.lifeEvents.add('Age ${c.age}: ${e.title} — ${choice.text}');
     }
 
+    // 💀 death check FIRST
     if (c.isDead) {
       c.isAlive = false;
+      c.health = 0;
       phase = GamePhase.dead;
+      currentEvent = null;
+      lastChoice = choice;
+      notifyListeners();
+      return;
     }
+
+    // 🧓 AGE UP ONLY IF ALIVE
+    c.age += _ageIncrement();
+
+    lastChoice = choice;
+    phase = GamePhase.outcome;
+
+    notifyListeners();
   }
 
   void makeChoice(Choice choice) {
@@ -154,4 +160,16 @@ class GameState extends ChangeNotifier {
     c.wealthHistory.add(c.wealth);
     c.relationshipHistory.add(c.relationships);
   }
+
+  // void _checkDeath() {
+  //   final c = character!;
+
+  //   if (c.isDead) {
+  //     c.isAlive = false;
+  //     c.health = 0;
+  //     phase = GamePhase.dead;
+  //     currentEvent = null;
+  //     lastChoice = null;
+  //   }
+  // }
 }

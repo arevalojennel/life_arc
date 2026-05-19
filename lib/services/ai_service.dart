@@ -245,28 +245,19 @@ Return ONLY valid JSON.
   }
 
   static LifeEvent _getUniqueFallbackEvent(String stage) {
+    final used = _usedFallbackEvents.putIfAbsent(stage, () => <String>{});
     final events = _fallbackEvents(stage);
 
-    // initialize set for this stage
-    _usedFallbackEvents.putIfAbsent(stage, () => <String>{});
-
-    final used = _usedFallbackEvents[stage]!;
-
-    // filter unused events
     final available = events.where((e) => !used.contains(e.title)).toList();
 
-    // if everything used, reset (or you can keep it strict)
     if (available.isEmpty) {
       used.clear();
       available.addAll(events);
     }
 
-    available.shuffle();
-    final selected = available.first;
+    final selected = available[DateTime.now().microsecond % available.length];
 
-    // mark as used
     used.add(selected.title);
-
     return selected;
   }
 

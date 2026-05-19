@@ -33,6 +33,14 @@ class GameScreen extends StatelessWidget {
       if (state.phase == GamePhase.outcome) {
         return _OutcomeScreen(state: state);
       }
+      if (state.phase == GamePhase.dead) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const DeathScreen()),
+          );
+        });
+        return const Scaffold(body: SizedBox());
+      }
 
       return _MainScreen(state: state);
     });

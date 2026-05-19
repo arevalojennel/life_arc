@@ -65,6 +65,7 @@ class Character {
     clampStats();
 
     if (health <= 0) {
+      health = 0;
       isAlive = false;
     }
   }
