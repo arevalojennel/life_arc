@@ -44,7 +44,8 @@ Players start by creating a character with:
 - Name
 - Personality trait
 
-![Character Creation](assets/gif/Character_Creation.gif)
+<!-- ![Character Creation](assets/gif/Character_Creation.gif) -->
+<img src="assets/gif/Character_Creation.gif" width="300" />
 
 Each character has:
 - Age
