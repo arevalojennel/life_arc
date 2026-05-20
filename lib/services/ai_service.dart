@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import '../models/character.dart';
 
 class AIService {
-  static const String _apiKey = 'AIzaSyAE2jFYR5NfpuMiTXx1IaARMkj5l2xuZsc';
+  static final String _apiKey = dotenv.env['GEMINI_API_KEY'] ?? '';
   static const String _model = 'gemini-2.5-flash';
   static String get _baseUrl =>
       'https://generativelanguage.googleapis.com/v1beta/models/$_model:generateContent?key=$_apiKey';
@@ -146,6 +147,7 @@ Return ONLY valid JSON.
           },
         }),
       );
+      print(response.body);
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
