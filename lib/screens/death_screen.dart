@@ -263,11 +263,13 @@ class DeathScreen extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('New Life',
-                            style: GoogleFonts.inter(
-                                fontSize: 14,
-                                color: C.deathText,
-                                fontWeight: FontWeight.w500)),
+                        Text(
+                          'New Life',
+                          style: GoogleFonts.inter(
+                              fontSize: 14,
+                              color: C.deathText,
+                              fontWeight: FontWeight.w500),
+                        ),
                         const SizedBox(width: 4),
                         const Icon(Icons.refresh, size: 15, color: C.deathSub),
                       ],
